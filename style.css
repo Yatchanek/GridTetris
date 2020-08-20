@@ -9,7 +9,7 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-image: url(./res/p1.jpg);
+    overflow: hidden;
     background-size: cover;
     background-position: 50% 50%;
     transition: all 500ms ease-in-out;
@@ -115,10 +115,12 @@ body {
     align-items: center;
 }
 
-#bkg {
+.bkg {
     position: absolute;
     top: 0;
     left: 0;
-    object-fit: cover;
+    z-index: -1;
+    object-fit: contain;
+    width: 100vw;
 }
 

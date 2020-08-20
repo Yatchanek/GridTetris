@@ -6,9 +6,9 @@ const scoreBox = document.querySelector('.score-box');
 const nextBox = document.querySelector('.next-box');
 const pausedBox = document.querySelector('.paused'); 
 const bkgImages = ['./res/p1.jpg', './res/p2.jpg', './res/p3.jpg', './res/p4.jpg', './res/p5.jpg', './res/p6.jpg', './res/p7.jpg'];
-const bkgImg = document.getElementById('bkg');
 const loadingScreen = document.querySelector('.loading-message');
 const STARTING_SPEED = 25;
+let bkg;
 let grid = [];
 let tetrominos = [];
 let colors = ['rgb(255, 0, 0)', 'rgb(0, 100, 250)', 'rgb(7, 82, 37)', 'rgb(255, 100, 0)', 'rgb(255, 0, 255)', 'rgb(124, 8, 128)', 'rgb(220, 220, 0)', 'rgba(225, 225, 225, .7)', 'rgb(150, 150, 150)', 'rgb(0, 0, 0)'];
@@ -38,8 +38,7 @@ tetrominos[5] = '.X...X...XX.....';
 tetrominos[6] = '..X...X..XX.....';
 
 setup();
-createGrid();
-createDOMCells();
+
 
 
 
@@ -54,6 +53,8 @@ function setup() {
             imgCount++;
             if (imgCount === len) {
                 loadingScreen.style.display = 'none';
+                createGrid();
+                createDOMCells();
                 gameLoop();
             }
         }
@@ -153,7 +154,12 @@ async function gameLoop() {
             }
             linesCount = 0;
             bkgCount++;
+            bkg = document.querySelector('.bkg');
+            bkg.remove();
             bkg = bkgImages[bkgCount % bkgImages.length]
+            bkg.classList.add('bkg');
+            document.body.prepend(bkg);
+            console.log(bkg);
         }
                
         gameLoop();
@@ -212,7 +218,9 @@ function createDOMCells() {
         }
     }
     scoreBox.innerHTML = `SCORE: ${score}`;
-    bkg = bkgImages[0]
+    bkg = bkgImages[0];
+    bkg.classList.add('bkg');
+    document.body.prepend(bkg);
     drawNextPiece();
 }
 
@@ -352,7 +360,12 @@ async function restartGame() {
         }, 500);
         collapseGrid();
         createGrid();
+        bkg = document.querySelector('.bkg');
+        bkg.remove();
         bkg = bkgImages[0];
+        bkg.classList.add('bkg');
+        document.body.prepend(bkg);
+        console.log(bkg)
     }
 }
 
