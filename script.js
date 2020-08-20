@@ -36,7 +36,7 @@ tetrominos[3] = '..X..XX..X......';
 tetrominos[4] = '.X...XX...X.....';
 tetrominos[5] = '.X...X...XX.....';
 tetrominos[6] = '..X...X..XX.....';
-console.log(loadingScreen)
+
 setup();
 createGrid();
 createDOMCells();
