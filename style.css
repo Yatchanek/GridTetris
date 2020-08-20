@@ -99,3 +99,22 @@ body {
     display: block;
     padding-bottom: 15px;
 }
+
+.loading-message {
+    font-size: 4rem;
+    width: 100vw;
+    height: 100vh;
+    color: white;
+    background-color: rgba(0, 0, 255, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#bkg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    object-fit: cover;
+}
+

@@ -7,6 +7,7 @@ const nextBox = document.querySelector('.next-box');
 const pausedBox = document.querySelector('.paused'); 
 const bkgImages = ['./res/p1.jpg', './res/p2.jpg', './res/p3.jpg', './res/p4.jpg', './res/p5.jpg', './res/p6.jpg', './res/p7.jpg'];
 const bkgImg = document.getElementById('bkg');
+const loadingScreen = document.querySelector('.loading-message');
 const STARTING_SPEED = 25;
 let grid = [];
 let tetrominos = [];
@@ -35,10 +36,11 @@ tetrominos[3] = '..X..XX..X......';
 tetrominos[4] = '.X...XX...X.....';
 tetrominos[5] = '.X...X...XX.....';
 tetrominos[6] = '..X...X..XX.....';
-
+console.log(loadingScreen)
+setup();
 createGrid();
 createDOMCells();
-setup();
+
 
 
 function setup() {
@@ -50,10 +52,14 @@ function setup() {
         bkgImages.push(img);
         img.onload = () => {
             imgCount++;
-            if (imgCount === len) gameLoop()
+            if (imgCount === len) {
+                loadingScreen.style.display = 'none';
+                gameLoop();
+            }
         }
     }
 }
+
 async function gameLoop() {
     if (!gameOver && !isPaused) {  
         drawGrid();
