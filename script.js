@@ -6,6 +6,7 @@ const scoreBox = document.querySelector('.score-box');
 const nextBox = document.querySelector('.next-box');
 const pausedBox = document.querySelector('.paused'); 
 const bkgImages = ['./res/p1.jpg', './res/p2.jpg', './res/p3.jpg', './res/p4.jpg', './res/p5.jpg', './res/p6.jpg', './res/p7.jpg'];
+const bkgImg = document.getElementById('bkg');
 const STARTING_SPEED = 25;
 let grid = [];
 let tetrominos = [];
@@ -37,10 +38,22 @@ tetrominos[6] = '..X...X..XX.....';
 
 createGrid();
 createDOMCells();
-gameLoop();
+setup();
 
 
-
+function setup() {
+    let len = bkgImages.length;
+    let imgCount = 0;
+    for (i=0; i < len; i++) {
+        let img = new Image()
+        img.src = bkgImages.shift()
+        bkgImages.push(img);
+        img.onload = () => {
+            imgCount++;
+            if (imgCount === len) gameLoop()
+        }
+    }
+}
 async function gameLoop() {
     if (!gameOver && !isPaused) {  
         drawGrid();
@@ -134,7 +147,7 @@ async function gameLoop() {
             }
             linesCount = 0;
             bkgCount++;
-            document.body.style.backgroundImage = `url(${bkgImages[bkgCount % bkgImages.length]})`
+            bkg = bkgImages[bkgCount % bkgImages.length]
         }
                
         gameLoop();
@@ -193,7 +206,7 @@ function createDOMCells() {
         }
     }
     scoreBox.innerHTML = `SCORE: ${score}`;
-    document.body.style.backgroundImage = `url(${bkgImages[0]})`;
+    bkg = bkgImages[0]
     drawNextPiece();
 }
 
@@ -333,7 +346,7 @@ async function restartGame() {
         }, 500);
         collapseGrid();
         createGrid();
-        document.body.style.backgroundImage = `url(${bkgImages[0]})`;
+        bkg = bkgImages[0];
     }
 }
 
